@@ -20,6 +20,14 @@ def generate_key_from_password(password: str, salt: bytes) -> bytes:
     # Fernet vereist een base64-gecodeerde sleutel
     return base64.urlsafe_b64encode(key)
 
+
+def encrypt_with_fernet(plaintext, password):
+    salt = os.urandom(16)
+    key = generate_key_from_password(password, salt)
+    fernet = Fernet(key)
+    token = fernet.encrypt(plaintext.encode())
+    return base64.b64encode(salt + token).decode()
+
 def main():
 
 

@@ -28,6 +28,16 @@ def encrypt_with_fernet(plaintext, password):
     token = fernet.encrypt(plaintext.encode())
     return base64.b64encode(salt + token).decode()
 
+
+def decrypt_with_fernet(token_b64, password):
+    data = base64.b64decode(token_b64)
+    salt = data[:16]
+    token = data[16:]
+    key = generate_key_from_password(password, salt)
+    fernet = Fernet(key)
+    decrypted = fernet.decrypt(token)
+    return decrypted.decode()
+
 def main():
 
 

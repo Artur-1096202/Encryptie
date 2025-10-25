@@ -39,6 +39,25 @@ def decrypt_with_fernet(token_b64, password):
     return decrypted.decode()
 
 def main():
+    print("Welkom bij de tekstversleutelaar\n")
+    choice = input("Wil je (1) versleutelen of (2) ontsleutelen? Voer 1 of 2 in: ")
+
+    if choice == '1':
+        text = input("Voer hier de tekst in die je wilt versleutelen: ")
+        password = input("Voer hier een wachtwoord in: ")
+        encrypted = encrypt_with_fernet(text, password)
+        print("Versleutelde tekst:\n", encrypted)
+
+    elif choice == '2':
+        token = input("Voer hier de versleutelde tekst in: ")
+        password = input("Voer hier het wachtwoord in: ")
+        try:
+            decrypted = decrypt_with_fernet(token, password)
+            print("Ontsleutelde tekst:\n", decrypted)
+        except Exception as decrypt_error:
+            print("Het ontsleutelen is mislukt. Controleer je wachtwoord en probeer het opnieuw.")
+    else:
+        print("Ongeldige keuze!")
 
 
 

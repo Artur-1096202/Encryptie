@@ -16,7 +16,7 @@ def generate_key_from_password(password: str, salt: bytes) -> bytes:
         algorithm=hashes.SHA256(),
         length=32,
         salt=salt,
-        iterations=200000,
+        iterations=300000,
         backend=default_backend()
     )
     key = Password_to_key_generator.derive(password.encode())

@@ -4,6 +4,9 @@ import os
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
+import pyperclip
+import threading
+import time
 
 def generate_key_from_password(password: str, salt: bytes) -> bytes:
     if not password:
@@ -45,6 +48,20 @@ def decrypt_with_fernet(token_b64, password):
     decrypted = fernet.decrypt(token)
     return decrypted.decode()
 
+
+def copy_to_clipboard_with_timeout(text, timeout=30):
+    """Dit kopieert een tekst naar de klembord en leegt het na een aantal seconden"""
+
+    pyperclip.copy(text)
+    print(f"\nDe tekst is gekopieerd naar het klembord. Het wordt over {timeout} seconden geleegd.")
+
+    def clear_clipboard():
+        time.sleep(timeout)
+        pyperclip.copy("")
+        print("Het klembord is nu automatisch geleegd.")
+
+    threading.Thread(target=clear_clipboard, daemon=True).start()
+
 def main():
     print("=== Welkom bij de Symmetrische Encryptie Tool (AES-256 / Fernet) ===")
     choice = input("1 = Encryptie | 2 = Decryptie\nKeuze: ")
@@ -55,6 +72,10 @@ def main():
         try:
             encrypted = encrypt_with_fernet(text, password)
             print("\nVersleutelde tekst:\n", encrypted)
+
+            # Dit kopieert naar de klembord met automatische leegmaak na 30 seconden
+            copy_to_clipboard_with_timeout(encrypted, timeout=30)
+
         except Exception as error:
             print("Fout: Er ging iets mis. Controleer je invoer en probeer opnieuw.")
             print("Details:", error)
@@ -66,6 +87,10 @@ def main():
         try:
             decrypted = decrypt_with_fernet(token, password)
             print("\nOntsleutelde tekst:\n", decrypted)
+
+            # Dit kopieert naar de klembord met automatische leegmaak na 30 seconden
+            copy_to_clipboard_with_timeout(decrypted, timeout=30)
+
         except Exception:
             print("Het ontsleutelen is mislukt. Controleer je wachtwoord en probeer het opnieuw.")
     else:

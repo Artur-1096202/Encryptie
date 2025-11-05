@@ -26,6 +26,9 @@ def generate_key_from_password(password: str, salt: bytes) -> bytes:
 
 
 def encrypt_with_fernet(plaintext, password):
+    if not plaintext:
+        raise ValueError("Tekst mag niet leeg zijn.")
+
     salt = os.urandom(16)
     key = generate_key_from_password(password, salt)
     fernet = Fernet(key)

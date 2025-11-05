@@ -6,7 +6,7 @@ Het doel is om gevoelige informatie veilig opteslaan en overtedragen op basis va
 ## Functionaliteit
 Het werkt zo je voert een tekst en een wachtwoord in en de applicatie maakt daar een versleutelde tekst van die veilig opgeslagen of gedeeld kan worden. Later kan je deze versleutelde tekst weer terug omzetten naar de originele tekst zolang je de zelfde wachtwoord gebruikt. 
 
-De applicatie heeft vier belangrijke punten: 
+De applicatie heeft vijf belangrijke punten: 
 
 Als eerste versleutelen.
  De tekst die de gebruiker invoert wordt omgezet in een beveiligde code dus ciphertext met AES-256. De output is een base64-string die makkelijk kan worden opgeslagen of gedeeld. 
@@ -20,6 +20,10 @@ Als derde key-derivatie.
 Als vierde integriteit. 
  De applicatie gebruikt Fernet wat naast encryptie ook controleert of de tekst niet is aangepast via HMAC. Dit betekent dat je zeker kan weten dat de versleutelde tekst niet is veranderd. 
 
+Als vijfde: kopiëren naar klembord. 
+De applicatie kopieert de versleutelde of ontsleutelde tekst automatisch naar het klembord. Na 30 seconden wordt het klembord automatisch geleegd voor extra veiligheid.
+
+Het wachtwoord wordt niet opgeslagen alleen de tijdelijke output staat op het klembord.
 
 ## Cryptografie en keuzes 
 
@@ -61,22 +65,24 @@ Vervolgens kies je:
 - `1` om tekst te versleutelen  
 - `2` om tekst te ontsleutelen
 
+De output wordt automatisch naar het klembord gekopieerd en blijft daar 30 seconden. Daarna wordt het klembord automatisch geleegd voor extra veiligheid.
 
 ## Bronnen
 
-- https://www.encryptionconsulting.com/nl/opleidingscentrum/symmetrische-versus-asymmetrische-encryptie/
-- https://axcrypt.net/nl/blog/symmetric-vs-asymmetric-encryption/?srsltid=AfmBOor7Cdp1KTkOyryFM5POGIMdrcijP_8qnbo20PmQUxTTu_TSXxQX
-- https://www.kiteworks.com/nl/veilige-bestandsoverdracht/alles-over-aes-algoritme-stappen/
-- https://nitratine.net/blog/post/encryption-and-decryption-in-python/
-- https://en.wikipedia.org/wiki/PBKDF2
-- https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle
-- https://www.geeksforgeeks.org/python/fernet-symmetric-encryption-using-cryptography-module-in-python/
-- https://www.geeksforgeeks.org/python/how-to-encrypt-and-decrypt-strings-in-python/
-- https://cryptography.io/en/latest/fernet/
-- https://stackoverflow.com/questions/55776011/decrypt-with-fernet-python 
-- https://blog.bytescrum.com/encrypting-and-decrypting-data-with-fernet-in-python
-- https://medium.com/@sunilnepali844/complete-guide-to-encryption-and-decryption-in-python-for-beginners-61c2343c3f2b
-- https://thepythoncode.com/code/encrypt-decrypt-files-symmetric-python
-- https://www.youtube.com/watch?v=3hp4vnSb2qU
-- https://www.youtube.com/watch?v=zWNA2ThkVT4
+- Encryption Consulting. (2020, September 23). Symmetrische versus asymmetrische encryptie. https://www.encryptionconsulting.com/nl/opleidingscentrum/symmetrische-versus-asymmetrische-encryptie/
+- AxCrypt. (2022, December 1). Symmetric vs. asymmetric encryption. https://axcrypt.net/nl/blog/symmetric-vs-asymmetric-encryption/?srsltid=AfmBOor7Cdp1KTkOyryFM5POGIMdrcijP_8qnbo20PmQUxTTu_TSXxQX
+- Kiteworks. (2023, Juni 8). Alles over het AES-algoritme: stappen. https://www.kiteworks.com/nl/veilige-bestandsoverdracht/alles-over-aes-algoritme-stappen/
+- Nitratine. (2018, September 16). Encryption and decryption in Python. https://nitratine.net/blog/post/encryption-and-decryption-in-python/
+- Wikipedia. (2025, November 3). PBKDF2. https://en.wikipedia.org/wiki/PBKDF2
+- Wikipedia. (2025, November 4). Kerckhoffs’s principle. https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle
+- GeeksforGeeks. (2020, September 28). Python Fernet symmetric encryption using cryptography module in Python. https://www.geeksforgeeks.org/python/fernet-symmetric-encryption-using-cryptography-module-in-python/
+- GeeksforGeeks. (2024, Augustus 14). How to encrypt and decrypt strings in Python. https://www.geeksforgeeks.org/python/how-to-encrypt-and-decrypt-strings-in-python/
+- Cryptography.io. (nd). Fernet — cryptography documentation. https://cryptography.io/en/latest/fernet/
+- Stack Overflow. (nd). Decrypt with Fernet Python. https://stackoverflow.com/questions/55776011/decrypt-with-fernet-python 
+- Bytescrum. (2023, Oktober 29). Encrypting and decrypting data with Fernet in Python. https://blog.bytescrum.com/encrypting-and-decrypting-data-with-fernet-in-python
+- Nepali, S. (2025, Juni 19). Complete guide to encryption and decryption in Python for beginners. https://medium.com/@sunilnepali844/complete-guide-to-encryption-and-decryption-in-python-for-beginners-61c2343c3f2b
+- The Python Code. (nd). Encrypt & decrypt files symmetric Python.https://thepythoncode.com/code/encrypt-decrypt-files-symmetric-python
+- R3ap3rPy. (nd). Python - Fernet encryption. https://www.youtube.com/watch?v=3hp4vnSb2qU
+- Misha Sv. (nd). How to Encrypt and Decrypt Files using Python. https://www.youtube.com/watch?v=zWNA2ThkVT4
+- Asim Code. (nd). Clipboard Copy In Python Using Pyperclip Module. https://www.youtube.com/watch?v=_BOj5W_rvG0
 

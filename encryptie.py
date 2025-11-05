@@ -6,6 +6,10 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
 
 def generate_key_from_password(password: str, salt: bytes) -> bytes:
+    if not password:
+        raise ValueError("Wachtwoord mag niet leeg zijn.")
+
+
     # Dit gebruikt PBKDF2HMAC om een sleutel uit het wachtwoord te genereren
 
     Password_to_key_generator = PBKDF2HMAC(
